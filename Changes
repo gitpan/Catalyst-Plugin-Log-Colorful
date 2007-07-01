@@ -1,5 +1,8 @@
 Revision history for Catalyst-Plugin-Log-Colorful
 
+0.02    2007/06-30/11:32
+        - Check log()->is_debug() now.
+
 0.01    2007-04-28/14:27
         First version, released on an unsuspecting world.
 
