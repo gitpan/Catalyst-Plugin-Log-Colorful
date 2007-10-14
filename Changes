@@ -1,6 +1,9 @@
 Revision history for Catalyst-Plugin-Log-Colorful
 
-0.02    2007/06-30/11:32
+0.03    2007-10-14/12:53
+        - Change config key to Plugin::Log::Colorful from log_colorful
+
+0.02    2007-06-30/11:32
         - Check log()->is_debug() now.
 
 0.01    2007-04-28/14:27

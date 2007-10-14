@@ -5,12 +5,15 @@ use Term::ANSIColor;
 use Data::Dumper;
 use vars qw($TEXT $BACKGROUND);
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 sub setup {
     my $c = shift;
-    $TEXT = $c->config->{log_colorful}{text} || 'red' ;
-    $BACKGROUND = $c->config->{log_colorful}{background};
+
+    my $config = $c->config->{'Plugin::Log::Colorful'} || $c->config->{log_colorful};
+
+    $TEXT = $config->{text} || 'red' ;
+    $BACKGROUND = $config->{background};
     $c = $c->NEXT::setup(@_);
     return $c;
 }
@@ -35,7 +38,8 @@ sub Catalyst::Log::color {
     $s->debug( color(  $color ) . $var .color('reset'));
 }
 
-1;
+1
+;
 
 =head1 NAME
 
@@ -47,7 +51,7 @@ Catalyst::Plugin::Log::Colorful - Catalyst Plugin for Colorful Log
  
  __PACKAGE__->config( 
     name => 'MyApp' ,
-    log_colorful => {
+    'Plugin::Log::Colorful' => {
         text        => 'blue',
         background  => 'green',
     }
