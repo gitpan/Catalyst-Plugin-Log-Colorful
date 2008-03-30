@@ -1,9 +1,10 @@
 Changes
-MANIFEST
-Makefile.PL
-README
 lib/Catalyst/Plugin/Log/Colorful.pm
+Makefile.PL
+MANIFEST
+README
 t/00-load.t
+t/01-color.t
 t/boilerplate.t
 t/pod-coverage.t
 t/pod.t
