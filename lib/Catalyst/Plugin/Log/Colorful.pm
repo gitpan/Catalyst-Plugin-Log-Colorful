@@ -5,7 +5,7 @@ use vars qw($TEXT $BACKGROUND);
 use Term::ANSIColor;
 use Data::Dumper;
 
-our $VERSION = 0.11;
+our $VERSION = 0.12;
 
 sub setup {
     my $c = shift;
@@ -135,17 +135,17 @@ Catalyst::Plugin::Log::Colorful - Catalyst Plugin for Colorful Log
 
 =head1 SYNOPSYS
 
-sub foo : Private {
-    my ($self , $c  ) = @_;
-    $c->log->debug('debug');
-    $c->log->info( 'info'); 
-    $c->log->warn( 'warn');
-    $c->log->error('error');
-    $c->log->fatal('fatal');
-
-    $c->log->debug('debug' , 'red','white');
-    $c->log->warn( 'warn' , 'blue' );
-}
+ sub foo : Private {
+     my ($self , $c  ) = @_;
+     $c->log->debug('debug');
+     $c->log->info( 'info'); 
+     $c->log->warn( 'warn');
+     $c->log->error('error');
+     $c->log->fatal('fatal');
+ 
+     $c->log->debug('debug' , 'red','white');
+     $c->log->warn( 'warn' , 'blue' );
+ }
 
 myapp.yml # default color is set but can change.
 
