@@ -5,7 +5,7 @@ use vars qw($TEXT $BACKGROUND);
 use Term::ANSIColor;
 use Data::Dumper;
 
-our $VERSION = 0.12;
+our $VERSION = '0.13';
 
 sub setup {
     my $c = shift;
@@ -15,26 +15,26 @@ sub setup {
     $BACKGROUND = $config->{background};
 
     if ( !$config->{on_backward_compatibility} ) {
-        $c->log( Catalyst::Plugin::Log::Coloful::_::Log->new( { color_table => $config->{color_table} } ) ) ;
+        $c->log( Catalyst::Plugin::Log::Colorful::_::Log->new( { color_table => $config->{color_table} } ) ) ;
     }
 
     $c = $c->NEXT::setup(@_);
     return $c;
 }
- 
+
 sub Catalyst::Log::color {
     my ( $s ,$var, $color , $bg_color ) = @_;
 
     # is not debug mdoe.
     return unless $s->is_debug;
 
-    $color      = $color    || $Catalyst::Plugin::Log::Colorful::TEXT ; 
-    $bg_color   = $bg_color || $Catalyst::Plugin::Log::Colorful::BACKGROUND ;
+    $color    = $color    || $Catalyst::Plugin::Log::Colorful::TEXT ;
+    $bg_color = $bg_color || $Catalyst::Plugin::Log::Colorful::BACKGROUND ;
 
     if ( ref $var eq 'ARRAY' or ref $var eq 'HASH') {
         $var = Dumper( $var );
     }
-    
+
     if ( $bg_color ) {
         $color .= " on_$bg_color";
     }
@@ -42,7 +42,7 @@ sub Catalyst::Log::color {
     $s->debug( color(  $color ) . $var .color('reset'));
 }
 
-package Catalyst::Plugin::Log::Coloful::_::Log;
+package Catalyst::Plugin::Log::Colorful::_::Log;
 
 use strict;
 use warnings;
@@ -54,70 +54,64 @@ __PACKAGE__->mk_accessors(qw/color_table/);
 sub new {
     my $class = shift;
     my $args  = shift;
-    my $self = $class->SUPER::new();
+    my $self  = $class->SUPER::new();
     $self->{color_table} = $args->{color_table};
     return $self;
-    
 }
 sub warn {
     my ( $s ,$var, $color , $bg_color ) = @_;
     return unless $s->is_warn;
-    $color      = $color    || $s->{color_table}{warn}{color}     || 'yellow' ; 
-    $bg_color   = $bg_color ||  $s->{color_table}{warn}{bg_color} ;
+    $color    = $color    || $s->{color_table}{warn}{color}    || 'yellow' ;
+    $bg_color = $bg_color || $s->{color_table}{warn}{bg_color} ;
     $s->_colorful_log('warn', $var, $color , $bg_color );
 }
-sub error{ 
+sub error{
     my ( $s ,$var, $color , $bg_color ) = @_;
     return unless $s->is_error;
-    $color      = $color    || $s->{color_table}{error}{color}     || 'red' ; 
-    $bg_color   = $bg_color ||  $s->{color_table}{error}{bg_color} ;
+    $color    = $color    || $s->{color_table}{error}{color}    || 'red' ;
+    $bg_color = $bg_color || $s->{color_table}{error}{bg_color} ;
     $s->_colorful_log('error', $var, $color , $bg_color );
-
 }
 sub fatal{
     my ( $s ,$var, $color , $bg_color ) = @_;
     return unless $s->is_fatal;
-    $color      = $color    || $s->{color_table}{fatal}{color}     || 'white' ; 
-    $bg_color   = $bg_color ||  $s->{color_table}{fatal}{bg_color} || 'red';
+    $color    = $color    || $s->{color_table}{fatal}{color}    || 'white';
+    $bg_color = $bg_color || $s->{color_table}{fatal}{bg_color} || 'red';
     $s->_colorful_log('fatal', $var, $color , $bg_color );
-
 }
-
 sub debug {
     my ( $s ,$var, $color , $bg_color ) = @_;
 
     return unless $s->is_debug;
 
-    $color      = $color    || $s->{color_table}{debug}{color}     || 'black' ; 
-    $bg_color   = $bg_color ||  $s->{color_table}{debug}{bg_color} || 'white';
-    
+    $color    = $color    || $s->{color_table}{debug}{color}    || 'black';
+    $bg_color = $bg_color || $s->{color_table}{debug}{bg_color} || 'white';
+
     $s->_colorful_log('debug', $var, $color , $bg_color );
 }
-
 sub info {
     my ( $s ,$var, $color , $bg_color ) = @_;
 
     return unless $s->is_info;
 
-    $color      = $color    || $s->{color_table}{info}{color}    ; 
-    $bg_color   = $bg_color || $s->{color_table}{info}{bg_color} ;
-    
+    $color    = $color    || $s->{color_table}{info}{color}    ;
+    $bg_color = $bg_color || $s->{color_table}{info}{bg_color} ;
+
     if ( $color ) {
         $s->_colorful_log('info', $var, $color , $bg_color );
     }
     else {
         $s->SUPER::info( $var );
-    }   
-
+    }
 }
 
 sub _colorful_log {
     my ( $s , $type, $var , $color , $bg_color ) = @_;
-    
+
     if ( ref $var ) {
         $var = Dumper( $var );
     }
-    
+
     if ( $bg_color ) {
         $color .= " on_$bg_color";
     }
@@ -133,18 +127,18 @@ sub _colorful_log {
 
 Catalyst::Plugin::Log::Colorful - Catalyst Plugin for Colorful Log
 
-=head1 SYNOPSYS
+=head1 SYNOPSIS
 
  sub foo : Private {
      my ($self , $c  ) = @_;
      $c->log->debug('debug');
-     $c->log->info( 'info'); 
+     $c->log->info( 'info');
      $c->log->warn( 'warn');
      $c->log->error('error');
      $c->log->fatal('fatal');
- 
-     $c->log->debug('debug' , 'red','white');
-     $c->log->warn( 'warn' , 'blue' );
+
+     $c->log->debug('debug' , 'red', 'white');
+     $c->log->warn( 'warn' ,  'blue' );
  }
 
 myapp.yml # default color is set but can change.
@@ -167,10 +161,10 @@ myapp.yml # default color is set but can change.
 =head1 DESCRIPTION
 
 Sometimes when I am monitoring 'tail -f error_log' or './script/my_server.pl'
-during develop phase , I could not find log message because of a lot of
-logs. This plugin may help to find it out.  This plugin is using L<Term::ANSIColor> . 
+during develop phase, I could not find log message because of a lot of
+logs. This plugin may help to find it out.  This plugin is using L<Term::ANSIColor>.
 
-Of course when you open log file with vi or some editor , the color wont
+Of course when you open log file with vi or some editor, the color wont
 change and also you will see additional log such as '[31;47moraora[0m'.
 
 =head1 BACKWARD COMPATIBILITY
@@ -180,8 +174,8 @@ for new version I remove $c->log->color() but still you can use if you turn on o
 This plugin injects a color() method into the L<Catalyst::Log> namespace.
 
  use Catalyst qw/-Debug ConfigLoader Log::Colorful/;
- 
- __PACKAGE__->config( 
+
+ __PACKAGE__->config(
     name => 'MyApp' ,
     'Plugin::Log::Colorful' => {
         on_backward_compatibility => 1,
