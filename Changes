@@ -1,5 +1,9 @@
 Revision history for Catalyst-Plugin-Log-Colorful
 
+0.14    2009-05-07/16:55
+        - migrated to Catalyst 5.8.x
+        - changed to Module::Install
+
 0.13    2008-10-17/22:30
         - #40124 fix typo.
 

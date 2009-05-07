@@ -5,7 +5,7 @@ use vars qw($TEXT $BACKGROUND);
 use Term::ANSIColor;
 use Data::Dumper;
 
-our $VERSION = '0.13';
+our $VERSION = '0.14';
 
 sub setup {
     my $c = shift;
@@ -18,7 +18,7 @@ sub setup {
         $c->log( Catalyst::Plugin::Log::Colorful::_::Log->new( { color_table => $config->{color_table} } ) ) ;
     }
 
-    $c = $c->NEXT::setup(@_);
+    $c = $c->next::method(@_);
     return $c;
 }
 

@@ -1,20 +1,17 @@
 use strict;
 use warnings;
-use ExtUtils::MakeMaker;
+use inc::Module::Install;
 
-WriteMakefile(
-    NAME                => 'Catalyst::Plugin::Log::Colorful',
-    AUTHOR              => 'Tomohiro Teranishi <tomohiro.teranishi@gmail.com>',
-    VERSION_FROM        => 'lib/Catalyst/Plugin/Log/Colorful.pm',
-    ABSTRACT_FROM       => 'lib/Catalyst/Plugin/Log/Colorful.pm',
-    PL_FILES            => {},
-    PREREQ_PM => {
-        'Test::More'        => 0,
-        'Catalyst'          => 0,
-        'Catalyst::Log'     => 0,
-        'Term::ANSIColor'   => 0,
-        'Data::Dumper'      => 0,
-    },
-    dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean               => { FILES => 'Catalyst-Plugin-Log-Colorful-*' },
-);
+name 'Catalyst-Plugin-Log-Colorful';
+author 'Tomohiro Teranishi <tomohiro.teranishi@gmail.com>';
+repository 'http://svn.coderepos.org/share/lang/perl/Catalyst-Plugin-Log-Colorful/trunk';
+
+all_from 'lib/Catalyst/Plugin/Log/Colorful.pm';
+requires 'Test::More'        => 0;
+requires 'Catalyst::Runtime' => 5.70;
+requires 'Catalyst::Log'     => 0;
+requires 'Term::ANSIColor'   => 0;
+requires 'Data::Dumper'      => 0;
+license 'perl';
+auto_install;
+WriteAll;
