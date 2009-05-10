@@ -1,5 +1,8 @@
 Revision history for Catalyst-Plugin-Log-Colorful
 
+0.15    2009-05-11/00:08
+        - added require modules to Makefile.PL
+
 0.14    2009-05-07/16:55
         - migrated to Catalyst 5.8.x
         - changed to Module::Install

@@ -5,7 +5,7 @@ use vars qw($TEXT $BACKGROUND);
 use Term::ANSIColor;
 use Data::Dumper;
 
-our $VERSION = '0.14';
+our $VERSION = '0.15';
 
 sub setup {
     my $c = shift;

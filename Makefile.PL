@@ -10,6 +10,7 @@ all_from 'lib/Catalyst/Plugin/Log/Colorful.pm';
 requires 'Test::More'        => 0;
 requires 'Catalyst::Runtime' => 5.70;
 requires 'Catalyst::Log'     => 0;
+requires 'MRO::Compat'       => 0;
 requires 'Term::ANSIColor'   => 0;
 requires 'Data::Dumper'      => 0;
 license 'perl';

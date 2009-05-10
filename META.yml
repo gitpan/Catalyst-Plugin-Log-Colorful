@@ -21,9 +21,10 @@ requires:
   Catalyst::Log: 0
   Catalyst::Runtime: 5.7
   Data::Dumper: 0
+  MRO::Compat: 0
   Term::ANSIColor: 0
   Test::More: 0
 resources:
   license: http://dev.perl.org/licenses/
   repository: http://svn.coderepos.org/share/lang/perl/Catalyst-Plugin-Log-Colorful/trunk
-version: 0.14
+version: 0.15
